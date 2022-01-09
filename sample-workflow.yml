@@ -1,0 +1,25 @@
+name: scan
+on:
+  # To manually run
+  workflow_dispatch: {}
+  # To automatically run for all commits on branch 'main'
+  push:
+    branches:
+      - main
+jobs:
+  # GoKart scan
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # GoKart scan
+      - name: GoKart scan
+        uses: bryk-io/gokart-scan-action@v0.3.0
+      
+      # Upload scan results
+      - name: Upload GoKart results
+        uses: github/codeql-action/upload-sarif@v1

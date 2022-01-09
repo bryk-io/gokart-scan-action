@@ -1,0 +1,32 @@
+project_name: gokart-scan-action
+before:
+  hooks:
+    - docker login ghcr.io -u {{ .Env.GITHUB_USER }} -p {{ .Env.GITHUB_TOKEN }}
+build:
+  # this is required since we are not building any Go binaries
+  skip: true
+source:
+  enabled: true
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - typo
+dockers:
+  -
+    dockerfile: Dockerfile
+    skip_push: 'false'
+    extra_files:
+      - scan.sh
+    image_templates:
+      - "ghcr.io/bryk-io/{{ .ProjectName }}:{{ .Version }}"
+      - "ghcr.io/bryk-io/{{ .ProjectName }}:latest"
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.created={{ .CommitDate }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+      - "--label=org.opencontainers.image.source=https://github.com/bryk-io/{{ .ProjectName }}"

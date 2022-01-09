@@ -1,0 +1,23 @@
+name: bryk-io/gokart-scan
+description: Static analysis tool for Go that finds vulnerabilities using SSA (single static assignment)
+author: bryk-io
+branding:
+  icon: shield
+  color: orange
+runs:
+  using: docker
+  image: Dockerfile
+  entrypoint: "/bin/scan"
+inputs:
+  globalsTainted:
+    description: "Marks global variables as dangerous."
+    required: false
+    default: "no"
+  verbose:
+    description: "Outputs full trace of taint analysis."
+    required: false
+    default: "yes"
+  config:
+    description: "Custom configuration file (optional)."
+    required: false
+    default: ""
