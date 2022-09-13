@@ -7,4 +7,4 @@ help:
 
 ## build: Build the action image
 build:
-	docker build -t ghcr.io/bryk-io/chart-deploy-action .
+	docker build -t ghcr.io/bryk-io/gokart-scan-action .
