@@ -28,7 +28,7 @@ Sample step configuration.
 ```yaml
 steps:
   - name: GoKart scan
-    uses: bryk-io/gokart-scan@v0.3.0
+    uses: bryk-io/gokart-scan-action@v0.3.0
     # example with all parameters
     with:
       globalsTainted: yes
@@ -83,7 +83,7 @@ jobs:
 
       # GoKart scan
       - name: GoKart scan
-        uses: bryk-io/gokart-scan@v0.3.0
+        uses: bryk-io/gokart-scan-action@v0.3.0
       
       # Upload scan results
       - name: Upload GoKart results
